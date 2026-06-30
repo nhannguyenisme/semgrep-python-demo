@@ -1,0 +1,33 @@
+# ============================================================
+# File: python-security.yml
+# Mục đích:
+#   Custom rule cho Semgrep để phát hiện lỗi bảo mật trong Python.
+#
+# Rule phát hiện:
+#   1. Hardcoded Password
+#   2. os.system()
+#   3. SQL query tạo bằng nối chuỗi
+# ============================================================
+
+rules:
+  - id: python-hardcoded-password
+    patterns:
+      - pattern: $NAME = "..."
+      - metavariable-regex:
+          metavariable: $NAME
+          regex: (?i).*(password|passwd|pwd|secret).*
+    message: "Phát hiện password/secret được hardcode trong source code."
+    languages: [python]
+    severity: WARNING
+
+  - id: python-dangerous-os-system
+    pattern: os.system(...)
+    message: "Không nên dùng os.system với input người dùng vì có nguy cơ Command Injection."
+    languages: [python]
+    severity: ERROR
+
+  - id: python-sql-query-string-concat
+    pattern-regex: '(?im)^[^#\n]*(select|insert|update|delete)[^\n]*\+[^\n]*'
+    message: "Có dấu hiệu nối chuỗi khi tạo câu SQL. Nên dùng parameterized query để tránh SQL Injection."
+    languages: [python]
+    severity: ERROR
