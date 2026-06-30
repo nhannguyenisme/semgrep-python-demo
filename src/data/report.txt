@@ -1,1 +1,22 @@
-Đây là file báo cáo demo cho bài Python + Semgrep.
+BÁO CÁO DEMO PYTHON + SEMGREP
+
+Tên đề tài: Ứng dụng Semgrep để phát hiện lỗi bảo mật trong mã nguồn Python
+
+Mục tiêu:
+- Xây dựng chương trình Python demo có chức năng đăng nhập và đọc file.
+- Tạo phiên bản code có lỗi bảo mật để Semgrep phát hiện.
+- Sửa code theo hướng an toàn hơn.
+- Quét lại bằng Semgrep để kiểm chứng kết quả.
+
+Các lỗi bảo mật được demo:
+1. Hardcoded Password
+2. SQL Injection
+3. Command Injection
+
+Kết quả:
+- vulnerable_app.py: Semgrep phát hiện 3 findings.
+- secure_app.py: Semgrep quét lại và không còn findings.
+
+Kết luận:
+Semgrep giúp phát hiện sớm lỗi bảo mật trong mã nguồn Python, hỗ trợ lập trình viên viết code an toàn hơn.
+
